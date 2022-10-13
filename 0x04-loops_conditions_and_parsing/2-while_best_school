@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # displays Good School 10 times.
 
-COUNTER=0
-while [ $COUNTER -lt 10 ]
+COUNTER=1
+while [ $COUNTER -le 10 ]
 do
-    echo "Good School"
-    let COUNTER=COUNTER+1
+echo "Good School"
+((COUNTER++))
 done
