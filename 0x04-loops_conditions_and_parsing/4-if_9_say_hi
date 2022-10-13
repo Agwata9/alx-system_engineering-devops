@@ -4,12 +4,9 @@
 COUNTER=0
 while [ $COUNTER -lt 11 ]
 do
-    if [ $COUNTER = 3 ]
+    if [ $COUNTER = 9 ]
     then
-        echo "bad luck"
-    elif [ $COUNTER = 8 ]
-    then
-        echo "good luck"
+        echo "Hi"
     else
         echo "Best School"
     fi
