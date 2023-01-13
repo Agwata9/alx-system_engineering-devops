@@ -1,29 +1,26 @@
-# Install Nginx
+# Install NginX
+# With puppet
+
+exec { 'apt-get-update':
+  command => '/usr/bin/apt-get update',
+}
+
 package { 'nginx':
-  ensure => present,
+  ensure  => installed,
+  require => Exec['apt-get-update'],
 }
 
-# Ensure Nginx service is running
+file { '/var/www/html/index.html':
+  content => 'Hello World!',
+  require => Package['nginx'],
+}
+
+exec {'redirect_me':
+  command  => 'sed -i "24i\	rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default',
+  provider => 'shell'
+}
+
 service { 'nginx':
-  ensure => running,
-  enable => true,
+  ensure  => running,
+  require => Package['nginx'],
 }
-
-# Configure Nginx to listen on port 80
-file { '/etc/nginx/sites-available/default':
-  ensure => file,
-  content => 'server {
-    listen 80;
-    server_name _;
-
-    location / {
-        return 200 "Hello World!";
-    }
-
-    location /redirect_me {
-        return 301 /;
-    }
-}',
-  notify => Service['nginx'],
-}
-
