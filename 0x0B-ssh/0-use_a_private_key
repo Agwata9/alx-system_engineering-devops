@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
-#Bash that uses ssh to connect to your server
-
-ssh -i ~/.ssh/school ubuntu@52.91.146.62
+# Connects to a server using ssh, a private key and the user 'ubuntu'
+ssh -i ~/.ssh/school -o "PasswordAuthentication no" ubuntu@52.91.146.62
