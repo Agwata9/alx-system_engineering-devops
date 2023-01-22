@@ -1,19 +1,4 @@
 #!/usr/bin/env bash
-
-# Start Nginx
-sudo service nginx start
-
-# Check if Nginx is listening on port 80
-if ! sudo netstat -tulnp | grep -q ":80"; then
-  # Update Nginx configuration to listen on port 80
-  sudo sed -i 's/listen.*80;/listen 80;/' /etc/nginx/nginx.conf
-  # Restart Nginx
-  sudo service nginx restart
-fi
-
-# Check if port 80 is open
-if ! sudo ufw status | grep -q "80/tcp"; then
-  # Open port 80
-  sudo ufw allow 80/tcp
-fi
-
+# Open the 80 port
+sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
+service nginx restart
